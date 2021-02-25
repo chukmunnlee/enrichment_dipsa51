@@ -1,0 +1,9 @@
+.form-label {
+  font-weight: bolder;
+  font-size: 1.3em;
+}
+
+/* pseudo class */
+:disabled {
+  cursor: not-allowed;
+}

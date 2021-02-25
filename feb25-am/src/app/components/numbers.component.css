@@ -1,0 +1,15 @@
+.num-thumb {
+  width: 12vw;
+  height: auto;
+  padding: 5px;
+  border: 2px lightgrey solid;
+  border-radius: 8px;
+  opacity: .4;
+  transition-property: opacity;
+  transition-timing-function: linear;
+  transition-duration: 300ms;
+}
+
+.num-thumb:hover {
+  opacity: 1;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DisplayRange } from './components/pager.component';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,7 @@ export class AppComponent implements OnInit {
   display = []
 
   ngOnInit() {
-    for (let i = 11; i < 21; i++)
-      this.display.push(i)
+    this.pageTo({ min: 0, max: 10 })
   }
 
   processDigit(d) {
@@ -24,4 +24,11 @@ export class AppComponent implements OnInit {
   reset() {
     this.digit = -1
   }
+
+  pageTo(range: DisplayRange) {
+    this.display = []
+    for (let i = range.min; i < (range.max + 1); i++)
+      this.display.push(i)
+  }
+
 }

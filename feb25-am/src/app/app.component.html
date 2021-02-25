@@ -6,6 +6,10 @@
   Please press a number
 </h1>
 
+<hr>
+<app-pager (displayRage)="pageTo($event)"></app-pager>
+<hr>
+
 <app-numbers
   *ngFor="let i of display"
   [digit]="i"

@@ -1,9 +1,22 @@
 <div class="container">
 
-	<h1><code>hello, world</code></h1>
+	<div class="row mb-3 mt-3">
+		<div class="col">
+			<img src="assets/nasa.png" style="height: 10vh;">
+			<span style="font-size: 1.7em; font-weight: bold">
+				Image of the Day
+			</span>
+		</div>
+	</div>
 
 	<app-api-key (apiKey)="getApiKey($event)"></app-api-key>
 
 	<app-display [imageOfTheDay]="iotd"></app-display>
+
+	<div class="row" *ngIf="canShare">
+		<div class="col d-flex justify-content-end">
+			<i class="fas fa-share-alt fa-lg" (click)="shareIt()"></i>
+		</div>
+	</div>
 
 </div>

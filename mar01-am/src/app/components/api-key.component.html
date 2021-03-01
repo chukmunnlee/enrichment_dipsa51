@@ -1,0 +1,19 @@
+
+<form [formGroup]="form" (ngSubmit)="processForm()">
+	<div class="form-group">
+		<div class="input-group input-group-lg">
+
+			<input id="" class="form-control" type="text" 
+					placeholder="Your NASA API Key" formControlName="apiKey">
+
+			<div class="input-group-append">
+
+				<button type="submit" class="btn btn-warning">
+					Get
+					<i class="fas fa-images"></i>
+				</button>
+
+			</div>
+		</div>
+	</div>
+</form>

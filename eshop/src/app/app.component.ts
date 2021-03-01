@@ -17,5 +17,6 @@ export class AppComponent {
     else
       tmpBasket[idx].quantity += 1
     this.basket = tmpBasket
+
   }
 }

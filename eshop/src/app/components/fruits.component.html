@@ -1,0 +1,12 @@
+<div class="row mb-3">
+  <div class="col">
+    <h3>List of Fruits</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <img *ngFor="let f of fruits" (click)="selection(f)"
+      src="assets/fruits/{{ f }}.png" class="fruit-thumbnail">
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="row mt-2">
+  <div class="col d-flex justify-content-between">
+    <h2>Delivery</h2>
+    <button type="button" class="btn btn-primary" [disabled]="form.invalid" (click)="dumpContents()">
+      Checkout
+    </button>
+  </div>
+</div>
+
+<div class="row mt-2">
+   <div class="col">
+     <form [formGroup]="form">
+       <div class="form-group">
+         <label for="name" class="form-label">Name:</label>
+         <input type="text" id="name" class="form-control" formControlName="name">
+       </div>
+       <div class="form-group">
+         <label for="email" class="form-label">Email:</label>
+         <input type="email" id="email" class="form-control" formControlName="email">
+       </div>
+       <table class="table" *ngIf="items.length > 0">
+         <thead>
+         <tr>
+           <th> Name </th>
+           <th> Quantity </th>
+         </tr>
+         </thead>
+         <tbody formArrayName="items">
+         <tr *ngFor="let i of items.controls" [formGroup]="i">
+           <td>
+             <input type="text" class="form-control" formControlName="name">
+           </td>
+           <td>
+             <input type="number" class="form-control" min="1" formControlName="quantity">
+           </td>
+         </tr>
+         </tbody>
+       </table>
+     </form>
+   </div>
+ </div>

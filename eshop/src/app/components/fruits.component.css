@@ -1,0 +1,13 @@
+.fruit-thumbnail {
+  width: 8vw;
+  height: auto;
+  padding: 5px;
+  margin: 5px;
+  opacity: .4;
+}
+
+.fruit-thumbnail:hover {
+  border-radius: 8px;
+  border: 2px gray solid;
+  opacity: 1;
+}

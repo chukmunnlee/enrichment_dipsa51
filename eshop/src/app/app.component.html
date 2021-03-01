@@ -1,0 +1,16 @@
+<div class="row mt-2">
+  <div class="col d-flex justify-content-center">
+    <img src="assets/kwik-e-mart.png">
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col" id="shelf">
+    <app-fruits (selected)="addToBasket($event)"></app-fruits>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col">
+    <app-basket [contents]="basket"></app-basket>
+  </div>
+</div>

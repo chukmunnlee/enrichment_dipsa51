@@ -1,0 +1,13 @@
+<h2>Fortune Cookies </h2>
+
+<button type="button" (click)="getFortunes()">
+	More!
+</button>
+
+<hr>
+
+<h2 *ngFor="let c of cookies">
+	{{ c }}
+</h2>
+
+

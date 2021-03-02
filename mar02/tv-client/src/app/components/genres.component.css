@@ -1,0 +1,10 @@
+.item-genre {
+  padding: 5px;
+  margin-bottom: 2px;
+  font-size: 1.2em;
+}
+
+.item-genre:hover {
+  font-weight: bold;
+}
+

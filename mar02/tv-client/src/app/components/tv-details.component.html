@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <td>
+      <h2>{{ tvShow?.name }}</h2>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img [src]="tvShow?.image" style="width: 50vw;">
+    </td>
+  </tr>
+  <tr>
+    <td [innerHTML]="tvShow?.summary" style="font-size: 1.2em;">
+    </td>
+  </tr>
+  <tr *ngIf="tvShow?.official_site">
+    <td>
+      <h3>
+        More details <a [href]="tvShow.official_site" target="_blank">here</a>
+      </h3>
+    </td>
+  </tr>
+</table>

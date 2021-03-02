@@ -6,6 +6,10 @@ const mysql = require('mysql2/promise')
 
 // SQL
 const SQL_SELECT_GENRES = 'select distinct(genre) from genres order by genre asc'
+const SQL_SELECT_TV_SHOW_BY_GENRE = 'select tvid from genres where genre like ?'
+const SQL_SELECT_TV_SHOWS_BY_TVIDS = 'select tvid, name from tv_shows where tvid in ( ? ) order by name asc';
+const SQL_SELECT_TV_SHOW_BY_TVID = 'select * from tv_shows where tvid = ?';
+const SQL_SELECT_TV_SHOWS_BY_TVIDS_ON_GENRE = 'select tvid, name from tv_shows where tvid in (select tvid from genres where genre like ?) order by name asc'
 
 // set the port
 const PORT = parseInt(process.env.PORT) || 3000
@@ -34,7 +38,7 @@ app.use(cors())
 
 // Resources
 // GET /api/genres
-app.get('/genres', async (req, resp) => {
+app.get('/api/genres', async (req, resp) => {
 
     // get a connection from the pool
     const conn = await pool.getConnection()
@@ -53,6 +57,64 @@ app.get('/genres', async (req, resp) => {
     } finally {
         conn.release()
     }
+})
+
+// GET /api/genre/:genre
+app.get('/api/genre/:genre', async (req, resp) => {
+
+    const genre = req.params['genre']
+
+    const conn = await pool.getConnection();
+
+    conn.query(SQL_SELECT_TV_SHOW_BY_GENRE, [ genre ])
+        .then(result => {
+            const tvids = result[0].map(v => v['tvid'])
+            return conn.query(SQL_SELECT_TV_SHOWS_BY_TVIDS, [ tvids ])
+        })
+        .then(result => {
+            resp.status(200)
+                .type('application/json')
+                .json(result[0])
+        })
+        .catch(error => {
+            console.error('ERROR: ')
+            console.dir(e)
+            resp.status(500).type('application/json').json({ error: e })
+        })
+        .finally(() => {
+            conn.release()
+        })
+})
+
+// GET /api/tvshow/:tvid
+app.get('/api/tvshow/:tvid', async (req, resp) => {
+
+    const tvid = parseInt(req.params['tvid'])
+
+    const conn = await pool.getConnection();
+
+    try {
+
+        const [ result, _ ] = await conn.query(SQL_SELECT_TV_SHOW_BY_TVID, [ tvid ])
+        if (result.length <= 0) {
+            resp.status(404)
+                .type('application/json')
+                .json({ error: `tvid ${tvid} not found` })
+            return
+        }
+
+        resp.status(200)
+            .type('application/json')
+            .json(result[0])
+
+    } catch(e) {
+        console.error('ERROR: ')
+        console.dir(e)
+        resp.status(500).type('application/json').json({ error: e })
+   } finally {
+       conn.release()
+   }
+
 })
 
 // Start the application
